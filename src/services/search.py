@@ -2,7 +2,7 @@
 # ИСПРАВЛЕННАЯ ВЕРСИЯ - умный поиск с поддержкой аренды/покупки/имущества
 
 from sqlalchemy.orm import Session
-from sqlalchemy import or_, and_
+from sqlalchemy import or_, and_, func
 from typing import List, Optional, Dict, Any
 from src.database.models import Listing
 from src.llm.prompt_engine import SearchPromptEngine
@@ -184,33 +184,33 @@ class SearchService:
         # Район
         if filters.get("district_code"):
             district = filters["district_code"]
-            query = query.filter(Listing.address_description.ilike(f"%{district}%"))
+            query = query.filter(func.lower(Listing.address_description).like(f"%{district.lower()}%"))
             logger.info(f"  📍 Фильтр по району: '{district}'")
         
         # Назначение (список)
         if filters.get("land_allowed_use_name_list"):
             purposes = filters["land_allowed_use_name_list"]
-            conditions = [Listing.land_allowed_use_name.ilike(f"%{p}%") for p in purposes]
+            conditions = [func.lower(Listing.land_allowed_use_name).like(f"%{p.lower()}%") for p in purposes]
             query = query.filter(or_(*conditions))
             logger.info(f"  🎯 Фильтр по назначениям: {purposes}")
         
         # Назначение (одиночное - для совместимости)
         elif filters.get("land_allowed_use_name"):
             use_name = filters["land_allowed_use_name"]
-            query = query.filter(Listing.land_allowed_use_name.ilike(f"%{use_name}%"))
+            query = query.filter(func.lower(Listing.land_allowed_use_name).like(f"%{use_name.lower()}%"))
             logger.info(f"  🎯 Фильтр по назначению: '{use_name}'")
         
         # ✅ НОВОЕ: Тип сделки (аренда/продажа)
         if filters.get("purchase_kind_list"):
             kinds = filters["purchase_kind_list"]
-            conditions = [Listing.purchase_kind_name.ilike(f"%{k}%") for k in kinds]
+            conditions = [func.lower(Listing.purchase_kind_name).like(f"%{k.lower()}%") for k in kinds]
             query = query.filter(or_(*conditions))
             logger.info(f"  📋 Фильтр по типам сделок: {kinds}")
         
         # Тип сделки (одиночный - для совместимости)
         elif filters.get("purchase_kind_name"):
             kind = filters["purchase_kind_name"]
-            query = query.filter(Listing.purchase_kind_name.ilike(f"%{kind}%"))
+            query = query.filter(func.lower(Listing.purchase_kind_name).like(f"%{kind.lower()}%"))
             logger.info(f"  📝 Фильтр по типу сделки: '{kind}'")
         
         # Цена
@@ -233,7 +233,7 @@ class SearchService:
         # Статус
         if filters.get("stage_state_name"):
             stage = filters["stage_state_name"]
-            query = query.filter(Listing.stage_state_name.ilike(f"%{stage}%"))
+            query = query.filter(func.lower(Listing.stage_state_name).like(f"%{stage.lower()}%"))
             logger.info(f"  ⏱️ Фильтр по статусу: '{stage}'")
         
         query = query.order_by(Listing.start_price.asc(), Listing.total_square.desc())
@@ -282,7 +282,7 @@ class SearchService:
         found_purpose = False
         for keyword, db_purposes in PURPOSE_MAPPING.items():
             if keyword in query_lower:
-                conditions = [Listing.land_allowed_use_name.ilike(f"%{p}%") for p in db_purposes]
+                conditions = [func.lower(Listing.land_allowed_use_name).like(f"%{p.lower()}%") for p in db_purposes]
                 query = query.filter(or_(*conditions))
                 logger.info(f"  🎯 Фильтр по ключу '{keyword}': {db_purposes}")
                 found_purpose = True
@@ -292,7 +292,7 @@ class SearchService:
         found_purchase_kind = False
         for keyword, kinds in PURCHASE_KIND_MAPPING.items():
             if keyword in query_lower:
-                conditions = [Listing.purchase_kind_name.ilike(f"%{k}%") for k in kinds]
+                conditions = [func.lower(Listing.purchase_kind_name).like(f"%{k.lower()}%") for k in kinds]
                 query = query.filter(or_(*conditions))
                 logger.info(f"  📋 Фильтр по типу сделки '{keyword}': {kinds}")
                 found_purchase_kind = True
@@ -317,10 +317,10 @@ class SearchService:
             if normalized in query_lower or city in query_lower:
                 query = query.filter(
                     or_(
-                        Listing.address_description.ilike(f"%{city}%"),
-                        Listing.address_description.ilike(f"%{normalized}%"),
-                        Listing.name.ilike(f"%{city}%"),
-                        Listing.name.ilike(f"%{normalized}%")
+                        func.lower(Listing.address_description).like(f"%{city.lower()}%"),
+                        func.lower(Listing.address_description).like(f"%{normalized.lower()}%"),
+                        func.lower(Listing.name).like(f"%{city.lower()}%"),
+                        func.lower(Listing.name).like(f"%{normalized.lower()}%")
                     )
                 )
                 logger.info(f"  📍 Фильтр по городу: {city}")
