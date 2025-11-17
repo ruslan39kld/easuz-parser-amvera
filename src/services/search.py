@@ -1,5 +1,5 @@
 # src/services/search.py
-# ИСПРАВЛЕННАЯ ВЕРСИЯ - умный поиск по назначениям
+# ИСПРАВЛЕННАЯ ВЕРСИЯ - умный поиск с поддержкой аренды/покупки/имущества
 
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, and_
@@ -14,8 +14,11 @@ import re
 logger = logging.getLogger(__name__)
 
 
-# ✅ МАППИНГ: Что ищет LLM → Что есть в БД
+# ✅ МАППИНГ: Назначение использования земли/имущества
 PURPOSE_MAPPING = {
+    "имущество": ["Магазины", "Объекты торговли", "Производственная деятельность", "Деловое управление", "Бытовое обслуживание"],
+    "помещение": ["Магазины", "Объекты торговли", "Бытовое обслуживание", "Деловое управление"],
+    "здание": ["Производственная деятельность", "Деловое управление", "Магазины"],
     "торгов": ["Магазины", "Объекты торговли", "Рынки"],
     "бизнес": ["Производственная деятельность", "Деловое управление", "Склад"],
     "коммерч": ["Производственная деятельность", "Магазины", "Бытовое обслуживание"],
@@ -30,6 +33,13 @@ PURPOSE_MAPPING = {
     "производ": ["Производственная деятельность", "Строительная промышленность"],
     "обслуж": ["Бытовое обслуживание", "Коммунальное обслуживание"],
     "гараж": ["Хранение автотранспорта", "Служебные гаражи"],
+}
+
+# ✅ НОВОЕ: Маппинг типов сделок
+PURCHASE_KIND_MAPPING = {
+    "аренда": ["Аренда", "аренда"],
+    "покупка": ["Продажа", "продажа"],
+    "продажа": ["Продажа", "продажа"],
 }
 
 
@@ -96,9 +106,8 @@ class SearchService:
         
         logger.info(f"📊 Извлеченные фильтры: {filters}")
         
-        # ✅ НОВОЕ: Преобразуем фильтр назначения
-        if filters.get("land_allowed_use_name"):
-            filters = self._convert_purpose_filter(filters)
+        # ✅ НОВОЕ: Преобразуем фильтры
+        filters = self._convert_filters(filters, user_query)
         
         results = self._execute_search(filters)
         
@@ -115,9 +124,35 @@ class SearchService:
         
         return results
     
+    def _convert_filters(self, filters: Dict[str, Any], user_query: str) -> Dict[str, Any]:
+        """
+        ✅ НОВОЕ: Комплексное преобразование фильтров
+        Обрабатывает и назначение, и тип сделки
+        """
+        query_lower = user_query.lower()
+        
+        # 1️⃣ Преобразуем назначение использования
+        if filters.get("land_allowed_use_name"):
+            filters = self._convert_purpose_filter(filters)
+        
+        # 2️⃣ НОВОЕ: Определяем тип сделки из запроса
+        purchase_kinds = []
+        for keyword, kinds in PURCHASE_KIND_MAPPING.items():
+            if keyword in query_lower:
+                purchase_kinds.extend(kinds)
+                logger.info(f"  📋 Найден тип сделки '{keyword}': {kinds}")
+        
+        if purchase_kinds:
+            # Убираем дубликаты
+            purchase_kinds = list(set(purchase_kinds))
+            filters["purchase_kind_list"] = purchase_kinds
+            logger.info(f"  ✅ Итого типов сделок для поиска: {purchase_kinds}")
+        
+        return filters
+    
     def _convert_purpose_filter(self, filters: Dict[str, Any]) -> Dict[str, Any]:
         """
-        ✅ НОВОЕ: Преобразование фильтра назначения
+        Преобразование фильтра назначения
         LLM возвращает длинные названия → конвертируем в короткие из БД
         """
         original_purpose = filters["land_allowed_use_name"]
@@ -146,29 +181,45 @@ class SearchService:
         """Выполнение SQL-запроса с применением фильтров"""
         query = self.db.query(Listing).filter(Listing.is_active == True)
         
+        # Район
         if filters.get("district_code"):
             district = filters["district_code"]
             query = query.filter(Listing.address_description.ilike(f"%{district}%"))
             logger.info(f"  📍 Фильтр по району: '{district}'")
         
-        # ✅ НОВОЕ: Поиск по списку назначений
+        # Назначение (список)
         if filters.get("land_allowed_use_name_list"):
             purposes = filters["land_allowed_use_name_list"]
             conditions = [Listing.land_allowed_use_name.ilike(f"%{p}%") for p in purposes]
             query = query.filter(or_(*conditions))
             logger.info(f"  🎯 Фильтр по назначениям: {purposes}")
         
-        # ✅ СТАРЫЙ: Точный поиск (для совместимости)
+        # Назначение (одиночное - для совместимости)
         elif filters.get("land_allowed_use_name"):
             use_name = filters["land_allowed_use_name"]
             query = query.filter(Listing.land_allowed_use_name.ilike(f"%{use_name}%"))
             logger.info(f"  🎯 Фильтр по назначению: '{use_name}'")
         
+        # ✅ НОВОЕ: Тип сделки (аренда/продажа)
+        if filters.get("purchase_kind_list"):
+            kinds = filters["purchase_kind_list"]
+            conditions = [Listing.purchase_kind_name.ilike(f"%{k}%") for k in kinds]
+            query = query.filter(or_(*conditions))
+            logger.info(f"  📋 Фильтр по типам сделок: {kinds}")
+        
+        # Тип сделки (одиночный - для совместимости)
+        elif filters.get("purchase_kind_name"):
+            kind = filters["purchase_kind_name"]
+            query = query.filter(Listing.purchase_kind_name.ilike(f"%{kind}%"))
+            logger.info(f"  📝 Фильтр по типу сделки: '{kind}'")
+        
+        # Цена
         if filters.get("start_price_max") is not None:
             max_price = filters["start_price_max"]
             query = query.filter(Listing.start_price <= max_price)
             logger.info(f"  💰 Фильтр по цене: до {max_price:,}₽")
         
+        # Площадь
         if filters.get("total_square_min") is not None:
             min_square = filters["total_square_min"]
             query = query.filter(Listing.total_square >= min_square)
@@ -179,11 +230,7 @@ class SearchService:
             query = query.filter(Listing.total_square <= max_square)
             logger.info(f"  📐 Фильтр по площади: до {max_square} кв.м")
         
-        if filters.get("purchase_kind_name"):
-            kind = filters["purchase_kind_name"]
-            query = query.filter(Listing.purchase_kind_name.ilike(f"%{kind}%"))
-            logger.info(f"  📝 Фильтр по типу сделки: '{kind}'")
-        
+        # Статус
         if filters.get("stage_state_name"):
             stage = filters["stage_state_name"]
             query = query.filter(Listing.stage_state_name.ilike(f"%{stage}%"))
@@ -231,7 +278,7 @@ class SearchService:
         query_lower = user_query.lower()
         query = self.db.query(Listing).filter(Listing.is_active == True)
         
-        # ✅ УЛУЧШЕНО: Используем PURPOSE_MAPPING
+        # 1️⃣ Назначение использования
         found_purpose = False
         for keyword, db_purposes in PURPOSE_MAPPING.items():
             if keyword in query_lower:
@@ -241,9 +288,20 @@ class SearchService:
                 found_purpose = True
                 break
         
-        if not found_purpose:
-            logger.info("  ℹ️ Назначение не определено, ищем по всем объектам")
+        # 2️⃣ НОВОЕ: Тип сделки (аренда/покупка)
+        found_purchase_kind = False
+        for keyword, kinds in PURCHASE_KIND_MAPPING.items():
+            if keyword in query_lower:
+                conditions = [Listing.purchase_kind_name.ilike(f"%{k}%") for k in kinds]
+                query = query.filter(or_(*conditions))
+                logger.info(f"  📋 Фильтр по типу сделки '{keyword}': {kinds}")
+                found_purchase_kind = True
+                break
         
+        if not found_purpose and not found_purchase_kind:
+            logger.info("  ℹ️ Назначение и тип сделки не определены")
+        
+        # 3️⃣ Город
         cities = [
             "балашиха", "подольск", "химки", "королёв", "мытищи",
             "люберцы", "электросталь", "коломна", "красногорск", "одинцово",
@@ -269,6 +327,7 @@ class SearchService:
                 found_city = True
                 break
         
+        # 4️⃣ Цена
         found_price = False
         numbers = re.findall(r'\d+', query_lower)
         if numbers:
@@ -289,8 +348,8 @@ class SearchService:
                 logger.info(f"  💰 Фильтр по цене: до {price:,}₽")
                 found_price = True
         
-        # ✅ КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Если ничего не определено - вернуть пустой список
-        if not found_purpose and not found_city and not found_price:
+        # ✅ КРИТИЧЕСКОЕ: Если ничего не определено - возвращаем пустой список
+        if not found_purpose and not found_city and not found_price and not found_purchase_kind:
             logger.warning("  ⚠️ Не удалось определить параметры поиска - возвращаю пустой результат")
             return []
         
@@ -313,15 +372,23 @@ class SearchService:
         
         relaxed_filters = {}
         
+        # Сохраняем район
         if original_filters.get("district_code"):
             relaxed_filters["district_code"] = original_filters["district_code"]
         
-        # ✅ Сохраняем список назначений
+        # Сохраняем назначения
         if original_filters.get("land_allowed_use_name_list"):
             relaxed_filters["land_allowed_use_name_list"] = original_filters["land_allowed_use_name_list"]
         elif original_filters.get("land_allowed_use_name"):
             relaxed_filters["land_allowed_use_name"] = original_filters["land_allowed_use_name"]
         
+        # ✅ НОВОЕ: Сохраняем типы сделок
+        if original_filters.get("purchase_kind_list"):
+            relaxed_filters["purchase_kind_list"] = original_filters["purchase_kind_list"]
+        elif original_filters.get("purchase_kind_name"):
+            relaxed_filters["purchase_kind_name"] = original_filters["purchase_kind_name"]
+        
+        # Увеличиваем цену
         if original_filters.get("start_price_max"):
             original_price = original_filters["start_price_max"]
             relaxed_filters["start_price_max"] = int(original_price * 1.5)
