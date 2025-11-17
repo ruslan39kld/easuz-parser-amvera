@@ -1,0 +1,692 @@
+{
+  "objects": [
+    {
+      "id": 42148,
+      "name": "Земля в аренду на 13 лет 2 мес, площадью 910,00 кв.м",
+      "purchaseKind": {
+        "id": 7969,
+        "name": "Аренда земельных участков",
+        "description": "Торги по продаже прав на заключение договоров аренды земельных участков из земель, находящихся в государственной или муниципальной собственности",
+        "code": "landRent",
+        "isUse": false,
+        "regNumberPrefix": 0,
+        "externalId": 1000005,
+        "groupCode": null
+      },
+      "purchaseForm": {
+        "id": 7893,
+        "name": "Аукцион",
+        "description": "Auction",
+        "externalId": 1000001
+      },
+      "stageKind": {
+        "id": 7956,
+        "name": "Прием заявок",
+        "description": null,
+        "code": "acceptApplication",
+        "externalId": 1000003
+      },
+      "stageState": {
+        "id": 7969,
+        "name": "Торги объявлены",
+        "description": null,
+        "code": "announced",
+        "externalId": 1000004
+      },
+      "acceptPlanEndDate": "2023-11-29T15:00:00Z",
+      "categoryCode": "land",
+      "reviewPlanEndDate": "2023-11-24T15:00:00Z",
+      "organizerOrganizationInn": "5024139723",
+      "registryNumber": "00300060115281",
+      "startPrice": 300000.0,
+      "depositAmount": 300000.0,
+      "startStepAmount": 9000.0,
+      "rightTermUseYear": 13,
+      "rightTermUseMonth": 2,
+      "countViews": 13664,
+      "objectPurchases": [
+        {
+          "id": 39905,
+          "kind": {
+            "id": 1091,
+            "name": "Земельный участок",
+            "description": null,
+            "isUse": false,
+            "defaultGroupId": null,
+            "externalId": 1000060,
+            "objectGroup": {
+              "id": 1,
+              "name": "Недвижимое имущество",
+              "description": null,
+              "externalId": 1000001
+            }
+          },
+          "totalSquare": 910.0,
+          "objectCharacteristics": [
+            {
+              "id": 65657,
+              "objectPurchaseId": 39905,
+              "addresses": [
+                {
+                  "id": 42134,
+                  "name": "Московская область, д Ларево, г.о. Мытищи",
+                  "description": "Московская обл, Мытищи г.о., Ларево д, ",
+                  "objectPurchaseId": 39905,
+                  "latitude": 56.104513,
+                  "longitude": 37.526253,
+                  "codeOktmo": "46746000256"
+                }
+              ],
+              "totalSquare": 910.0,
+              "landAllowedUseName": "Для ведения личного подсобного хозяйства (приусадебный земельный участок)",
+              "landAllowedUseExternalId": 23,
+              "number": null,
+              "externalId": 1151462
+            }
+          ],
+          "externalId": 1276808,
+          "purchaseIsManual": false
+        }
+      ],
+      "photos": [
+        {
+          "id": 262475,
+          "name": "Фото 3.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=D1CF2D027C4336379E1ADAD79DD0F450&fileName=%d0%a4%d0%be%d1%82%d0%be+3.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2192495,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        },
+        {
+          "id": 262476,
+          "name": "Фото 2.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=21917721040D4E0D281310424E54CBD8&fileName=%d0%a4%d0%be%d1%82%d0%be+2.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2192496,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        },
+        {
+          "id": 262477,
+          "name": "Фото 1.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=36E79A8E14D023D0A4DE0100DECC0B5B&fileName=%d0%a4%d0%be%d1%82%d0%be+1.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2192497,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        }
+      ],
+      "isManual": false,
+      "state": {
+        "stateTypeId": 2,
+        "stateTypeCode": "Purchase",
+        "code": "Publish",
+        "name": "Опубликовано",
+        "description": null,
+        "id": 5
+      },
+      "isShowRequestToView": false,
+      "isFavorite": false,
+      "addressDescription": "Московская обл, Мытищи г.о., Ларево д, ",
+      "districtCode": "46746000",
+      "latitude": 56.104513,
+      "longitude": 37.526253
+    },
+    {
+      "id": 44216,
+      "name": "Земля в аренду на 20 лет, площадью 1 500,00 кв.м",
+      "purchaseKind": {
+        "id": 7969,
+        "name": "Аренда земельных участков",
+        "description": "Торги по продаже прав на заключение договоров аренды земельных участков из земель, находящихся в государственной или муниципальной собственности",
+        "code": "landRent",
+        "isUse": false,
+        "regNumberPrefix": 0,
+        "externalId": 1000005,
+        "groupCode": null
+      },
+      "purchaseForm": {
+        "id": 7893,
+        "name": "Аукцион",
+        "description": "Auction",
+        "externalId": 1000001
+      },
+      "stageKind": {
+        "id": 7956,
+        "name": "Прием заявок",
+        "description": null,
+        "code": "acceptApplication",
+        "externalId": 1000003
+      },
+      "stageState": {
+        "id": 7969,
+        "name": "Торги объявлены",
+        "description": null,
+        "code": "announced",
+        "externalId": 1000004
+      },
+      "acceptPlanEndDate": "2025-11-24T15:00:00Z",
+      "categoryCode": "land",
+      "reviewPlanEndDate": "2025-11-19T15:00:00Z",
+      "organizerOrganizationInn": "5024139723",
+      "registryNumber": "00300060116536",
+      "startPrice": 725212.5,
+      "depositAmount": 725212.5,
+      "startStepAmount": 21756.37,
+      "rightTermUseYear": 20,
+      "rightTermUseMonth": 0,
+      "countViews": 949,
+      "objectPurchases": [
+        {
+          "id": 41827,
+          "kind": {
+            "id": 1091,
+            "name": "Земельный участок",
+            "description": null,
+            "isUse": false,
+            "defaultGroupId": null,
+            "externalId": 1000060,
+            "objectGroup": {
+              "id": 1,
+              "name": "Недвижимое имущество",
+              "description": null,
+              "externalId": 1000001
+            }
+          },
+          "totalSquare": 1500.0,
+          "objectCharacteristics": [
+            {
+              "id": 67614,
+              "objectPurchaseId": 41827,
+              "addresses": [
+                {
+                  "id": 44222,
+                  "name": "Московская область, г.о. Павловский Посад, д. Криулино",
+                  "description": "Московская обл, Павлово-Посадский г.о., ",
+                  "objectPurchaseId": 41827,
+                  "latitude": 55.7506,
+                  "longitude": 38.5374,
+                  "codeOktmo": "46759000"
+                }
+              ],
+              "totalSquare": 1500.0,
+              "landAllowedUseName": "Для ведения личного подсобного хозяйства (приусадебный земельный участок)",
+              "landAllowedUseExternalId": 23,
+              "number": null,
+              "externalId": 1154583
+            }
+          ],
+          "externalId": 1280489,
+          "purchaseIsManual": false
+        }
+      ],
+      "photos": [
+        {
+          "id": 291497,
+          "name": "photo_2024-01-29_13-57-29.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=5E8BE84CACECEB68D27BD1384DFF1979&fileName=photo_2024-01-29_13-57-29.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2308059,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        }
+      ],
+      "isManual": false,
+      "state": {
+        "stateTypeId": 2,
+        "stateTypeCode": "Purchase",
+        "code": "Publish",
+        "name": "Опубликовано",
+        "description": null,
+        "id": 5
+      },
+      "isShowRequestToView": false,
+      "isFavorite": false,
+      "addressDescription": "Московская обл, Павлово-Посадский г.о., ",
+      "districtCode": "46759000",
+      "latitude": 55.7506,
+      "longitude": 38.5374
+    },
+    {
+      "id": 44509,
+      "name": "Продажа земли, площадью 2 756,00 кв.м",
+      "purchaseKind": {
+        "id": 7943,
+        "name": "Продажа земельных участков",
+        "description": "Торги по продаже земельных участков из земель, находящихся в государственной или муниципальной собственности",
+        "code": "landSale",
+        "isUse": false,
+        "regNumberPrefix": 0,
+        "externalId": 1000006,
+        "groupCode": null
+      },
+      "purchaseForm": {
+        "id": 7893,
+        "name": "Аукцион",
+        "description": "Auction",
+        "externalId": 1000001
+      },
+      "stageKind": {
+        "id": 7956,
+        "name": "Прием заявок",
+        "description": null,
+        "code": "acceptApplication",
+        "externalId": 1000003
+      },
+      "stageState": {
+        "id": 7969,
+        "name": "Торги объявлены",
+        "description": null,
+        "code": "announced",
+        "externalId": 1000004
+      },
+      "acceptPlanEndDate": "2025-11-20T15:00:00Z",
+      "categoryCode": "land",
+      "reviewPlanEndDate": "2025-11-17T15:00:00Z",
+      "organizerOrganizationInn": "5024139723",
+      "registryNumber": "00400010102984",
+      "startPrice": 1312765.48,
+      "depositAmount": 1312765.48,
+      "startStepAmount": 39382.96,
+      "rightTermUseYear": null,
+      "rightTermUseMonth": null,
+      "countViews": 1494,
+      "objectPurchases": [
+        {
+          "id": 42090,
+          "kind": {
+            "id": 1091,
+            "name": "Земельный участок",
+            "description": null,
+            "isUse": false,
+            "defaultGroupId": null,
+            "externalId": 1000060,
+            "objectGroup": {
+              "id": 1,
+              "name": "Недвижимое имущество",
+              "description": null,
+              "externalId": 1000001
+            }
+          },
+          "totalSquare": 2756.0,
+          "objectCharacteristics": [
+            {
+              "id": 67882,
+              "objectPurchaseId": 42090,
+              "addresses": [
+                {
+                  "id": 44517,
+                  "name": "Российская Федерация, Московская область, Волоколамский городской округ, д. Золево",
+                  "description": "Московская обл, Волоколамский м.о., Золево д, ",
+                  "objectPurchaseId": 42090,
+                  "latitude": 56.063927,
+                  "longitude": 36.229446,
+                  "codeOktmo": "46708000317"
+                }
+              ],
+              "totalSquare": 2756.0,
+              "landAllowedUseName": "Для индивидуального жилищного строительства",
+              "landAllowedUseExternalId": 21,
+              "number": null,
+              "externalId": 1154989
+            }
+          ],
+          "externalId": 1280963,
+          "purchaseIsManual": false
+        }
+      ],
+      "photos": [
+        {
+          "id": 295734,
+          "name": "photo_2024-02-21_09-51-28.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=2F9C7430272AFE071031427FE2A49A57&fileName=photo_2024-02-21_09-51-28.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2328068,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        },
+        {
+          "id": 295735,
+          "name": "photo_2024-02-21_09-51-27.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=6D7ED013F7CCBB92379355E68588A1CF&fileName=photo_2024-02-21_09-51-27.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2328069,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        },
+        {
+          "id": 295736,
+          "name": "photo_2024-02-21_09-51-25.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=89202FAA3B4220126DB1D29E2D3AA88D&fileName=photo_2024-02-21_09-51-25.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2328070,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        },
+        {
+          "id": 295737,
+          "name": "photo_2024-02-21_09-51-24.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=620EFBF1555EC06041D36994BF2CE967&fileName=photo_2024-02-21_09-51-24.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2328071,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        }
+      ],
+      "isManual": false,
+      "state": {
+        "stateTypeId": 2,
+        "stateTypeCode": "Purchase",
+        "code": "Publish",
+        "name": "Опубликовано",
+        "description": null,
+        "id": 5
+      },
+      "isShowRequestToView": false,
+      "isFavorite": false,
+      "addressDescription": "Московская обл, Волоколамский м.о., Золево д, ",
+      "districtCode": "46508000",
+      "latitude": 56.063927,
+      "longitude": 36.229446
+    },
+    {
+      "id": 44653,
+      "name": "Земля в аренду на 20 лет, площадью 461,00 кв.м",
+      "purchaseKind": {
+        "id": 7969,
+        "name": "Аренда земельных участков",
+        "description": "Торги по продаже прав на заключение договоров аренды земельных участков из земель, находящихся в государственной или муниципальной собственности",
+        "code": "landRent",
+        "isUse": false,
+        "regNumberPrefix": 0,
+        "externalId": 1000005,
+        "groupCode": null
+      },
+      "purchaseForm": {
+        "id": 7893,
+        "name": "Аукцион",
+        "description": "Auction",
+        "externalId": 1000001
+      },
+      "stageKind": {
+        "id": 7956,
+        "name": "Прием заявок",
+        "description": null,
+        "code": "acceptApplication",
+        "externalId": 1000003
+      },
+      "stageState": {
+        "id": 7969,
+        "name": "Торги объявлены",
+        "description": null,
+        "code": "announced",
+        "externalId": 1000004
+      },
+      "acceptPlanEndDate": "2025-11-26T15:00:00Z",
+      "categoryCode": "land",
+      "reviewPlanEndDate": "2025-11-21T15:00:00Z",
+      "organizerOrganizationInn": "5024139723",
+      "registryNumber": "00300060116830",
+      "startPrice": 26894.14,
+      "depositAmount": 26894.14,
+      "startStepAmount": 806.82,
+      "rightTermUseYear": 20,
+      "rightTermUseMonth": 0,
+      "countViews": 988,
+      "objectPurchases": [
+        {
+          "id": 42224,
+          "kind": {
+            "id": 1091,
+            "name": "Земельный участок",
+            "description": null,
+            "isUse": false,
+            "defaultGroupId": null,
+            "externalId": 1000060,
+            "objectGroup": {
+              "id": 1,
+              "name": "Недвижимое имущество",
+              "description": null,
+              "externalId": 1000001
+            }
+          },
+          "totalSquare": 461.0,
+          "objectCharacteristics": [
+            {
+              "id": 68017,
+              "objectPurchaseId": 42224,
+              "addresses": [
+                {
+                  "id": 44670,
+                  "name": "Российская Федерация, Московская область обл., г.о. Ступино, с. Киясово",
+                  "description": "Московская обл, Ступино г.о., Ступино г, ",
+                  "objectPurchaseId": 42224,
+                  "latitude": 55.041304,
+                  "longitude": 37.962721,
+                  "codeOktmo": "46776000001"
+                }
+              ],
+              "totalSquare": 461.0,
+              "landAllowedUseName": "Для ведения личного подсобного хозяйства (приусадебный земельный участок)",
+              "landAllowedUseExternalId": 23,
+              "number": null,
+              "externalId": 1152627
+            }
+          ],
+          "externalId": 1278118,
+          "purchaseIsManual": false
+        }
+      ],
+      "photos": [
+        {
+          "id": 297864,
+          "name": "20240301_143921.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=22CB66E84C71CECD748F6314024DBE31&fileName=20240301_143921.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2335790,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        }
+      ],
+      "isManual": false,
+      "state": {
+        "stateTypeId": 2,
+        "stateTypeCode": "Purchase",
+        "code": "Publish",
+        "name": "Опубликовано",
+        "description": null,
+        "id": 5
+      },
+      "isShowRequestToView": false,
+      "isFavorite": false,
+      "addressDescription": "Московская обл, Ступино г.о., Ступино г, ",
+      "districtCode": "46776000",
+      "latitude": 55.041304,
+      "longitude": 37.962721
+    },
+    {
+      "id": 44740,
+      "name": "Земля в аренду на 13 лет 2 мес, площадью 1 765,00 кв.м",
+      "purchaseKind": {
+        "id": 7969,
+        "name": "Аренда земельных участков",
+        "description": "Торги по продаже прав на заключение договоров аренды земельных участков из земель, находящихся в государственной или муниципальной собственности",
+        "code": "landRent",
+        "isUse": false,
+        "regNumberPrefix": 0,
+        "externalId": 1000005,
+        "groupCode": null
+      },
+      "purchaseForm": {
+        "id": 7893,
+        "name": "Аукцион",
+        "description": "Auction",
+        "externalId": 1000001
+      },
+      "stageKind": {
+        "id": 7956,
+        "name": "Прием заявок",
+        "description": null,
+        "code": "acceptApplication",
+        "externalId": 1000003
+      },
+      "stageState": {
+        "id": 7969,
+        "name": "Торги объявлены",
+        "description": null,
+        "code": "announced",
+        "externalId": 1000004
+      },
+      "acceptPlanEndDate": "2025-11-26T15:00:00Z",
+      "categoryCode": "land",
+      "reviewPlanEndDate": "2025-11-21T15:00:00Z",
+      "organizerOrganizationInn": "5024139723",
+      "registryNumber": "00300060116888",
+      "startPrice": 120248.74,
+      "depositAmount": 120248.74,
+      "startStepAmount": 3607.46,
+      "rightTermUseYear": 13,
+      "rightTermUseMonth": 2,
+      "countViews": 929,
+      "objectPurchases": [
+        {
+          "id": 42306,
+          "kind": {
+            "id": 1091,
+            "name": "Земельный участок",
+            "description": null,
+            "isUse": false,
+            "defaultGroupId": null,
+            "externalId": 1000060,
+            "objectGroup": {
+              "id": 1,
+              "name": "Недвижимое имущество",
+              "description": null,
+              "externalId": 1000001
+            }
+          },
+          "totalSquare": 1765.0,
+          "objectCharacteristics": [
+            {
+              "id": 68101,
+              "objectPurchaseId": 42306,
+              "addresses": [
+                {
+                  "id": 44758,
+                  "name": "Российская Федерация, Московская область, городской округ Ступино, д. Лаврентьево",
+                  "description": "Московская обл, Ступино г.о., Ступино г, ",
+                  "objectPurchaseId": 42306,
+                  "latitude": 55.084236,
+                  "longitude": 38.035276,
+                  "codeOktmo": "46776000001"
+                }
+              ],
+              "totalSquare": 1765.0,
+              "landAllowedUseName": "Для ведения личного подсобного хозяйства (приусадебный земельный участок)",
+              "landAllowedUseExternalId": 23,
+              "number": null,
+              "externalId": 1155099
+            }
+          ],
+          "externalId": 1281082,
+          "purchaseIsManual": false
+        }
+      ],
+      "photos": [
+        {
+          "id": 299167,
+          "name": "20240305_115015.jpg",
+          "url": "https://easuz.mosreg.ru/Arip/api/Core/FileStorage/GetDownload?fileHash=4A6BE0A6D787E5C96DC62FB4BB7E3616&fileName=20240305_115015.jpg",
+          "isPhoto": true,
+          "inActive": false,
+          "purchase": null,
+          "purchaseId": 0,
+          "externalId": 2339648,
+          "file": {
+            "fileHash": null,
+            "fileName": null,
+            "mimeType": null
+          }
+        }
+      ],
+      "isManual": false,
+      "state": {
+        "stateTypeId": 2,
+        "stateTypeCode": "Purchase",
+        "code": "Publish",
+        "name": "Опубликовано",
+        "description": null,
+        "id": 5
+      },
+      "isShowRequestToView": false,
+      "isFavorite": false,
+      "addressDescription": "Московская обл, Ступино г.о., Ступино г, ",
+      "districtCode": "46776000",
+      "latitude": 55.084236,
+      "longitude": 38.035276
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "take": 5,
+    "countStart": 1,
+    "countFinish": 5,
+    "countTotal": 3095,
+    "pageCount": 619
+  }
+}
