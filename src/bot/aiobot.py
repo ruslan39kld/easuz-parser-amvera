@@ -648,6 +648,22 @@ async def handle_compare(callback: types.CallbackQuery):
 
 
 async def main():
+    # ============================================
+    # АВТОИНИЦИАЛИЗАЦИЯ БАЗЫ ДАННЫХ
+    # ============================================
+    logger.info("🔧 Проверка базы данных...")
+    try:
+        from src.database.models import Base
+        from src.database.session import engine
+        
+        # Создаем все таблицы если их нет
+        Base.metadata.create_all(engine)
+        logger.info("✅ База данных инициализирована")
+    except Exception as e:
+        logger.error(f"❌ Ошибка инициализации БД: {e}")
+        raise
+    # ============================================
+    
     logger.info("🤖 Бот запущен")
     await dp.start_polling(bot)
 
