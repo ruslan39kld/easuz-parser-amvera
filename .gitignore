@@ -9,11 +9,11 @@ env/
 ENV/
 
 # База данных
-*.db
-*.sqlite
+# *.db
+#.sqlite
 *.sqlite3
-data/*.db
-data/*.backup
+# data/*.db
+# data/*.backup
 
 # IDE
 .vscode/
